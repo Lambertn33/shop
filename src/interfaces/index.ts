@@ -1,4 +1,4 @@
-
+// Models
 interface CategoryInterface {
     id: string,
     name: string
@@ -23,16 +23,19 @@ interface ProductInterface {
     price: number
 }
 
-interface RoleInterface {
-    id: string,
-    name: string
-}
-
 interface UserInterface {
     id: string,
     names: string,
     email: string,
-    roleId: string,
+    isAdmin: boolean,
+    password: string
+}
+
+//Inputs
+
+type newUserInputs = {
+    names: string,
+    email: string,
     password: string
 }
 
@@ -41,6 +44,6 @@ export {
     CartInterface,
     CartProductInterface,
     ProductInterface,
-    RoleInterface, 
-    UserInterface
+    UserInterface,
+    newUserInputs
 }

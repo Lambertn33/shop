@@ -4,7 +4,6 @@ import { CartProduct } from "../models/CartProduct";
 import { Category } from "../models/Category";
 import * as dotenv from 'dotenv';
 import { Product } from "../models/Product";
-import { Role } from "../models/Role";
 import { User } from "../models/User";
 
 dotenv.config();
@@ -16,7 +15,7 @@ const connection =  new Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    models: [Category, Cart, CartProduct, Product, Role, User]
+    models: [Category, Cart, CartProduct, Product, User]
 });
 
 export default connection;

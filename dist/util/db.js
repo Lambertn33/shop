@@ -29,7 +29,6 @@ const CartProduct_1 = require("../models/CartProduct");
 const Category_1 = require("../models/Category");
 const dotenv = __importStar(require("dotenv"));
 const Product_1 = require("../models/Product");
-const Role_1 = require("../models/Role");
 const User_1 = require("../models/User");
 dotenv.config();
 const connection = new sequelize_typescript_1.Sequelize({
@@ -39,6 +38,6 @@ const connection = new sequelize_typescript_1.Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    models: [Category_1.Category, Cart_1.Cart, CartProduct_1.CartProduct, Product_1.Product, Role_1.Role, User_1.User]
+    models: [Category_1.Category, Cart_1.Cart, CartProduct_1.CartProduct, Product_1.Product, User_1.User]
 });
 exports.default = connection;

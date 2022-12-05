@@ -9,19 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seedUsers = void 0;
-const bcryptjs_1 = require("bcryptjs");
-const uuid_1 = require("uuid");
-const User_1 = require("../models/User");
-const seedUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const hashedPassword = yield (0, bcryptjs_1.hash)('admin12345', 12);
-    const newAdmin = {
-        id: (0, uuid_1.v4)(),
-        names: 'system admin',
-        email: 'admin@gmail.com',
-        password: hashedPassword,
-        isAdmin: true
-    };
-    yield User_1.User.create(newAdmin);
+exports.getClientRole = exports.getAdminRole = void 0;
+const Role_1 = require("../models/Role");
+const enums_1 = require("../enums");
+const getAdminRole = () => __awaiter(void 0, void 0, void 0, function* () {
+    const adminRole = yield Role_1.Role.findOne({ where: { name: enums_1.RoleEnum.ADMIN } });
+    return adminRole === null || adminRole === void 0 ? void 0 : adminRole.id;
 });
-exports.seedUsers = seedUsers;
+exports.getAdminRole = getAdminRole;
+const getClientRole = () => __awaiter(void 0, void 0, void 0, function* () {
+    const clientRole = yield Role_1.Role.findOne({ where: { name: enums_1.RoleEnum.CLIENT } });
+    return clientRole === null || clientRole === void 0 ? void 0 : clientRole.id;
+});
+exports.getClientRole = getClientRole;

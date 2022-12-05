@@ -9,55 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const sequelize_typescript_1 = require("sequelize-typescript");
-const Cart_1 = require("./Cart");
-let User = class User extends sequelize_typescript_1.Model {
+exports.UserInput = exports.User = void 0;
+const type_graphql_1 = require("type-graphql");
+let User = class User {
 };
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-        primaryKey: true,
-        type: sequelize_typescript_1.DataType.STRING
-    }),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-        type: sequelize_typescript_1.DataType.STRING
-    }),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], User.prototype, "names", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-        type: sequelize_typescript_1.DataType.STRING
-    }),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-        type: sequelize_typescript_1.DataType.BOOLEAN
-    }),
-    __metadata("design:type", Boolean)
-], User.prototype, "isAdmin", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        allowNull: false,
-        type: sequelize_typescript_1.DataType.STRING
-    }),
+    (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
-__decorate([
-    (0, sequelize_typescript_1.HasOne)(() => Cart_1.Cart),
-    __metadata("design:type", Cart_1.Cart)
-], User.prototype, "cart", void 0);
 User = __decorate([
-    (0, sequelize_typescript_1.Table)({
-        timestamps: true,
-        tableName: 'users'
-    })
+    (0, type_graphql_1.ObjectType)()
 ], User);
 exports.User = User;
+let UserInput = class UserInput {
+};
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], UserInput.prototype, "names", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], UserInput.prototype, "email", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], UserInput.prototype, "password", void 0);
+UserInput = __decorate([
+    (0, type_graphql_1.InputType)()
+], UserInput);
+exports.UserInput = UserInput;
