@@ -15,11 +15,29 @@ export class User {
     password!: string
 }
 
+@ObjectType()
+export class LoginResponse {
+    @Field()
+    userId!: string
+
+    @Field()
+    token!: string
+}
+
 @InputType()
-export class UserInput implements Pick<User, "names" | "email" | "password"> {
+export class SignupInputs implements Pick<User, "names" | "email" | "password"> {
     @Field()
     names!: string
 
+    @Field()
+    email!: string
+
+    @Field()
+    password!: string;
+}
+
+@InputType()
+export class SigninInputs implements Pick<User, "email" | "password"> {
     @Field()
     email!: string
 

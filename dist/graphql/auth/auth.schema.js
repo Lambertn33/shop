@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserInput = exports.User = void 0;
+exports.SigninInputs = exports.SignupInputs = exports.LoginResponse = exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 let User = class User {
 };
@@ -33,21 +33,49 @@ User = __decorate([
     (0, type_graphql_1.ObjectType)()
 ], User);
 exports.User = User;
-let UserInput = class UserInput {
+let LoginResponse = class LoginResponse {
 };
 __decorate([
     (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
-], UserInput.prototype, "names", void 0);
+], LoginResponse.prototype, "userId", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
-], UserInput.prototype, "email", void 0);
+], LoginResponse.prototype, "token", void 0);
+LoginResponse = __decorate([
+    (0, type_graphql_1.ObjectType)()
+], LoginResponse);
+exports.LoginResponse = LoginResponse;
+let SignupInputs = class SignupInputs {
+};
 __decorate([
     (0, type_graphql_1.Field)(),
     __metadata("design:type", String)
-], UserInput.prototype, "password", void 0);
-UserInput = __decorate([
+], SignupInputs.prototype, "names", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], SignupInputs.prototype, "email", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], SignupInputs.prototype, "password", void 0);
+SignupInputs = __decorate([
     (0, type_graphql_1.InputType)()
-], UserInput);
-exports.UserInput = UserInput;
+], SignupInputs);
+exports.SignupInputs = SignupInputs;
+let SigninInputs = class SigninInputs {
+};
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], SigninInputs.prototype, "email", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], SigninInputs.prototype, "password", void 0);
+SigninInputs = __decorate([
+    (0, type_graphql_1.InputType)()
+], SigninInputs);
+exports.SigninInputs = SigninInputs;

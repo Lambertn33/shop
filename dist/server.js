@@ -14,11 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
+const type_graphql_1 = require("type-graphql");
+const express_graphql_1 = require("express-graphql");
 const categories_1 = require("./seeds/categories");
 const users_1 = require("./seeds/users");
+const auth_resolvers_1 = require("./graphql/auth/auth.resolvers");
 const db_1 = __importDefault(require("./util/db"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
+        const schema = yield (0, type_graphql_1.buildSchema)({
+            resolvers: [auth_resolvers_1.AuthResolver],
+            emitSchemaFile: true
+        });
         const app = (0, express_1.default)();
         app.use((0, body_parser_1.json)());
         app.use((req, res, next) => {
@@ -27,6 +34,10 @@ function main() {
             res.setHeader('Access-Control-Allow-Origin', '*');
             next();
         });
+        app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
+            schema: schema,
+            graphiql: true,
+        }));
         app.use((err, req, res, next) => {
             res.status(500).send({ message: 'invalid route' });
         });

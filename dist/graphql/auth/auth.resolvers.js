@@ -20,11 +20,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const uuid_1 = require("uuid");
 const bcryptjs_1 = require("bcryptjs");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const auth_schema_1 = require("./auth.schema");
 const User_1 = require("../../models/User");
 let AuthResolver = class AuthResolver {
@@ -43,14 +47,37 @@ let AuthResolver = class AuthResolver {
             return createdUser;
         });
     }
+    signin(input) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email, password } = input;
+            const user = yield User_1.User.findOne({ where: { email: email } });
+            if (!user)
+                throw new Error('invalid email');
+            const checkPassword = yield (0, bcryptjs_1.compare)(password, user.password);
+            if (!checkPassword)
+                throw new Error('invalid password');
+            let userToken = jsonwebtoken_1.default.sign({ userId: user.id, userNames: user.names, userEmail: user.email }, 'mySecretKey', { expiresIn: '1h' });
+            return {
+                token: userToken,
+                userId: user.id
+            };
+        });
+    }
 };
 __decorate([
     (0, type_graphql_1.Mutation)(() => auth_schema_1.User),
     __param(0, (0, type_graphql_1.Arg)("input")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_schema_1.UserInput]),
+    __metadata("design:paramtypes", [auth_schema_1.SignupInputs]),
     __metadata("design:returntype", Promise)
 ], AuthResolver.prototype, "signup", null);
+__decorate([
+    (0, type_graphql_1.Query)(() => auth_schema_1.LoginResponse),
+    __param(0, (0, type_graphql_1.Arg)("input")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [auth_schema_1.SigninInputs]),
+    __metadata("design:returntype", Promise)
+], AuthResolver.prototype, "signin", null);
 AuthResolver = __decorate([
     (0, type_graphql_1.Resolver)(() => auth_schema_1.User)
 ], AuthResolver);
